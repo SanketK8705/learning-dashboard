@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Learning Dashboard
 
-## Getting Started
+A futuristic student learning dashboard built with Next.js 15 App Router, Supabase, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+## Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Copy `.env.example` to `.env.local` and fill in your Supabase credentials
+4. Run the SQL in `supabase/schema.sql` in your Supabase SQL Editor
+5. Run `npm run dev`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Server / Client Split
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `page.tsx` is a **Server Component** — it fetches nothing itself but composes the layout
+- `CoursesSection` (async Server Component) calls `getCourses()` directly from the server using `@supabase/supabase-js`
+- All interactive components (`Sidebar`, `MobileNav`, `HeroTile`, `CourseCard`, etc.) are **Client Components** (`"use client"`) since they use Framer Motion or React state
+- `React.Suspense` wraps `CoursesSection` so skeleton loaders show while data fetches
 
-## Learn More
+### Data Fetching
 
-To learn more about Next.js, take a look at the following resources:
+Supabase is called server-side from `src/app/lib/supabase.ts`. No API keys are ever exposed to the client — only `NEXT_PUBLIC_SUPABASE_ANON_KEY` is used (public by Supabase design, protected by RLS policies).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Animations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Staggered entrance**: `BentoGrid` uses Framer Motion `variants` with `staggerChildren` so tiles cascade in sequentially
+- **Spring physics**: All hover states and sidebar highlights use `type: "spring"` with `stiffness: 300, damping: 20`
+- **No layout shifts**: Every animation uses `transform` (scale, translateY) and `opacity` only — zero repaints
+- **Progress bars**: Animated via CSS transition on mount, not layout-triggering properties
+- **Sidebar**: `layoutId="sidebar-highlight"` creates the sliding background on nav click
 
-## Deploy on Vercel
+### Challenges
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Mixing Server and Client Components with Framer Motion requires careful boundary placement — `BentoGrid` exports both the container and `tileVariant` so Server-rendered wrappers can still participate in the animation tree
+- Supabase RLS must be configured correctly or `getCourses()` returns an empty array silently — added explicit error throwing to surface this
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+
+See `.env.example`

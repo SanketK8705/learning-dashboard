@@ -1,41 +1,215 @@
 # Learning Dashboard
 
-A futuristic student learning dashboard built with Next.js 15 App Router, Supabase, Tailwind CSS, and Framer Motion.
+A futuristic cyberpunk-themed learning dashboard built with Next.js, TypeScript, Supabase, TailwindCSS, and Framer Motion.
 
-## Setup
+---
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Copy `.env.example` to `.env.local` and fill in your Supabase credentials
-4. Run the SQL in `supabase/schema.sql` in your Supabase SQL Editor
-5. Run `npm run dev`
+# Live Demo
 
-## Architecture
+Add your deployed Vercel URL here.
 
-### Server / Client Split
+Example:
 
-- `page.tsx` is a **Server Component** — it fetches nothing itself but composes the layout
-- `CoursesSection` (async Server Component) calls `getCourses()` directly from the server using `@supabase/supabase-js`
-- All interactive components (`Sidebar`, `MobileNav`, `HeroTile`, `CourseCard`, etc.) are **Client Components** (`"use client"`) since they use Framer Motion or React state
-- `React.Suspense` wraps `CoursesSection` so skeleton loaders show while data fetches
+```txt id="r2p8mx"
+https://learning-dashboard.vercel.app
+```
 
-### Data Fetching
+---
 
-Supabase is called server-side from `src/app/lib/supabase.ts`. No API keys are ever exposed to the client — only `NEXT_PUBLIC_SUPABASE_ANON_KEY` is used (public by Supabase design, protected by RLS policies).
+# GitHub Repository
 
-### Animations
+```txt id="n5u1wa"
+https://github.com/SanketK8705/learning-dashboard
+```
 
-- **Staggered entrance**: `BentoGrid` uses Framer Motion `variants` with `staggerChildren` so tiles cascade in sequentially
-- **Spring physics**: All hover states and sidebar highlights use `type: "spring"` with `stiffness: 300, damping: 20`
-- **No layout shifts**: Every animation uses `transform` (scale, translateY) and `opacity` only — zero repaints
-- **Progress bars**: Animated via CSS transition on mount, not layout-triggering properties
-- **Sidebar**: `layoutId="sidebar-highlight"` creates the sliding background on nav click
+---
 
-### Challenges
+# Tech Stack
 
-- Mixing Server and Client Components with Framer Motion requires careful boundary placement — `BentoGrid` exports both the container and `tileVariant` so Server-rendered wrappers can still participate in the animation tree
-- Supabase RLS must be configured correctly or `getCourses()` returns an empty array silently — added explicit error throwing to surface this
+* Next.js 16
+* TypeScript
+* TailwindCSS
+* Framer Motion
+* Supabase
+* Lucide React
+* Vercel
 
-## Environment Variables
+---
 
-See `.env.example`
+# Features
+
+* Modern cyberpunk UI
+* Animated dashboard experience
+* Responsive sidebar navigation
+* Course progress tracking
+* Activity heatmap visualization
+* Smooth Framer Motion animations
+* Supabase-powered backend
+* Fully responsive design
+
+---
+
+# Architecture Choices
+
+## App Router
+
+The project uses the Next.js App Router for:
+
+* file-based routing
+* better layout composition
+* improved rendering performance
+* server/client component separation
+
+---
+
+## Component Structure
+
+The application is divided into reusable modules:
+
+```txt id="m9x3qe"
+src/app/components → reusable UI components
+src/app/lib        → Supabase and utility logic
+src/app            → route pages
+```
+
+This structure improves scalability and maintainability.
+
+---
+
+# Server / Client Component Split
+
+## Server Components
+
+Server Components were used for:
+
+* page rendering
+* layout composition
+* fetching Supabase data
+
+This reduces unnecessary client-side JavaScript and improves performance.
+
+---
+
+## Client Components
+
+`"use client"` was used where interactivity was required:
+
+* Framer Motion animations
+* sidebar state management
+* hover interactions
+* animated progress bars
+* mobile navigation
+
+This helped maintain smooth UI interactions while keeping rendering efficient.
+
+---
+
+# Styling
+
+TailwindCSS was used to create:
+
+* a reusable design system
+* responsive layouts
+* consistent spacing and typography
+* cyberpunk-inspired dark theme
+
+Custom theme colors and utility classes were added for:
+
+* glow effects
+* gradients
+* surface layers
+* accent highlights
+
+---
+
+# Animations
+
+Framer Motion was used extensively for:
+
+* staggered page transitions
+* hover animations
+* animated progress indicators
+* sidebar transitions
+* micro-interactions
+
+Animations primarily use transforms and opacity to maintain smooth performance.
+
+---
+
+# Supabase Integration
+
+Supabase was used as the backend database for storing:
+
+* courses
+* course progress
+* learning analytics data
+
+Environment variables are securely managed using `.env.local`.
+
+---
+
+# Challenges Faced
+
+* Managing Server vs Client component boundaries
+* Creating reusable animated components
+* Maintaining responsive layouts across devices
+* Keeping animations smooth without affecting performance
+* Building a consistent cyberpunk-themed UI
+
+---
+
+# Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env id="h6v4tw"
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+---
+
+# `.env.example`
+
+```env id="u7c2lo"
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+
+---
+
+# Local Development
+
+Install dependencies:
+
+```bash id="j4n8ks"
+npm install
+```
+
+Run development server:
+
+```bash id="k2m5vz"
+npm run dev
+```
+
+---
+
+# Deployment
+
+The application is deployed using Vercel.
+
+Deployment steps:
+
+1. Push project to GitHub
+2. Import repository into Vercel
+3. Add environment variables
+4. Deploy
+
+---
+
+# Notes
+
+* `.env.local` is excluded using `.gitignore`
+* Actual Supabase credentials are never committed
+* Built with reusable animated UI components
+* Optimized for desktop and mobile devices

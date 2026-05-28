@@ -55,7 +55,7 @@ export default function CourseCard({ course }: { course: Course }) {
         borderColor: "#00D4FF33",
         boxShadow: "0 0 24px #00D4FF11, 0 8px 32px #00000060",
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
     >
       {/* Subtle card grain */}
       <div

@@ -144,7 +144,7 @@ const tileVariant = {
     y: 0,
 
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 260,
       damping: 24,
     },
@@ -202,7 +202,7 @@ export default function CoursesPage() {
                       boxShadow: "0 0 24px #00D4FF11",
                     }}
                     transition={{
-                      type: "spring",
+                      type: "spring" as const,
                       stiffness: 300,
                       damping: 20,
                     }}

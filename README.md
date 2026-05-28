@@ -23,6 +23,11 @@ https://github.com/SanketK8705/learning-dashboard
 ```
 
 ---
+- **Staggered entrance**: `BentoGrid` uses Framer Motion `variants` with `staggerChildren` so tiles cascade in sequentially
+- **Spring physics**: All hover states and sidebar highlights use `type: "spring" as const` with `stiffness: 300, damping: 20`
+- **No layout shifts**: Every animation uses `transform` (scale, translateY) and `opacity` only — zero repaints
+- **Progress bars**: Animated via CSS transition on mount, not layout-triggering properties
+- **Sidebar**: `layoutId="sidebar-highlight"` creates the sliding background on nav click
 
 # Tech Stack
 

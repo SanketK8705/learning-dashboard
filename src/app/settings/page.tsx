@@ -9,7 +9,7 @@ import { useUser } from "../context/UserContext";
 
 const tileVariant = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 260, damping: 24 } },
+  show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 260, damping: 24 } },
 };
 
 const container = {
@@ -30,7 +30,7 @@ function Toggle({ defaultOn = false }: { defaultOn?: boolean }) {
     >
       <motion.div
         animate={{ x: on ? 20 : 2 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        transition={{ type: "spring" as const, stiffness: 400, damping: 25 }}
         className="absolute top-0.5 w-4 h-4 rounded-full"
         style={{ background: on ? "#00D4FF" : "#4A5568" }}
       />
@@ -44,7 +44,7 @@ function Section({ icon: Icon, title, children }: { icon: React.ElementType; tit
       variants={tileVariant}
       className="rounded-2xl border border-border bg-surface p-6 flex flex-col gap-5"
       whileHover={{ scale: 1.005, borderColor: "#00D4FF22" }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
     >
       <div className="flex items-center gap-3 border-b border-border pb-4">
         <div className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center">

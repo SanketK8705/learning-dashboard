@@ -23,7 +23,7 @@ export default function ActivityTile() {
     <motion.article
       className="rounded-2xl border border-border bg-surface p-6 flex flex-col gap-5"
       whileHover={{ scale: 1.01, borderColor: "#00D4FF22" }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
     >
       <div className="flex items-center justify-between">
         <h2 className="font-syne font-semibold text-sm text-text">Activity</h2>
@@ -42,7 +42,7 @@ export default function ActivityTile() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{
                   delay: (wi * 7 + di) * 0.004,
-                  type: "spring",
+                  type: "spring" as const,
                   stiffness: 400,
                   damping: 20,
                 }}

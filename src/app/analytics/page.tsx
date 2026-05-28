@@ -25,7 +25,7 @@ const maxHours = Math.max(...weekData.map((d) => d.hours));
 
 const tileVariant = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 260, damping: 24 } },
+  show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 260, damping: 24 } },
 };
 
 const container = {
@@ -56,7 +56,7 @@ export default function AnalyticsPage() {
                   key={stat.label}
                   className="rounded-2xl border border-border bg-surface p-5 flex flex-col gap-2"
                   whileHover={{ scale: 1.02, borderColor: "#00D4FF33", boxShadow: "0 0 24px #00D4FF11" }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
                 >
                   <p className="font-mono text-[10px] text-text-dim uppercase tracking-widest">{stat.label}</p>
                   <p className="font-syne font-bold text-2xl text-text">{stat.value}</p>
@@ -70,7 +70,7 @@ export default function AnalyticsPage() {
               variants={tileVariant}
               className="rounded-2xl border border-border bg-surface p-6"
               whileHover={{ scale: 1.005, borderColor: "#00D4FF22" }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-syne font-semibold text-sm text-text">Hours This Week</h2>
@@ -88,7 +88,7 @@ export default function AnalyticsPage() {
                       }}
                       initial={{ height: 0 }}
                       animate={{ height: `${(d.hours / maxHours) * 100}%` }}
-                      transition={{ delay: i * 0.07, type: "spring", stiffness: 200, damping: 20 }}
+                      transition={{ delay: i * 0.07, type: "spring" as const , stiffness: 200, damping: 20 }}
                     />
                     <span className="font-mono text-[10px] text-text-dim">{d.day}</span>
                   </div>
@@ -101,7 +101,7 @@ export default function AnalyticsPage() {
               variants={tileVariant}
               className="rounded-2xl border border-border bg-surface p-6"
               whileHover={{ scale: 1.005, borderColor: "#00D4FF22" }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
             >
               <h2 className="font-syne font-semibold text-sm text-text mb-5">Course Progress</h2>
               <div className="flex flex-col gap-4">

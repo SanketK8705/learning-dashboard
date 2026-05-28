@@ -30,7 +30,7 @@ export default function MobileNav() {
                   <motion.div
                     layoutId="mobile-highlight"
                     className="absolute inset-x-2 inset-y-1 bg-accent-dim rounded-lg"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    transition={{ type: "spring" as const, stiffness: 400, damping: 30 }}
                   />
                 )}
                 <Icon

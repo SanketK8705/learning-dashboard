@@ -15,7 +15,7 @@ export default function HeroTile() {
     <motion.article
       className="relative col-span-2 rounded-2xl border border-border bg-surface overflow-hidden p-8"
       whileHover={{ scale: 1.01 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
     >
       <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-accent opacity-[0.04] blur-3xl animate-glow-pulse pointer-events-none" />
       <div className="absolute -bottom-16 -right-16 w-56 h-56 rounded-full bg-accent opacity-[0.03] blur-3xl pointer-events-none" />

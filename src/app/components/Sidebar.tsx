@@ -27,7 +27,7 @@ export default function Sidebar() {
   return (
     <motion.nav
       animate={{ width: collapsed ? 64 : 220 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ type: "spring" as const, stiffness: 300, damping: 30 }}
       className="relative hidden md:flex flex-col h-screen bg-surface border-r border-border shrink-0 overflow-hidden"
     >
       {/* Logo */}
@@ -63,7 +63,7 @@ export default function Sidebar() {
                     <motion.div
                       layoutId="sidebar-highlight"
                       className="absolute inset-0 bg-accent-dim border border-accent/20 rounded-lg"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      transition={{ type: "spring" as const, stiffness: 400, damping: 30 }}
                     />
                   )}
                   <Icon
@@ -101,7 +101,7 @@ export default function Sidebar() {
       >
         <motion.div
           animate={{ rotate: collapsed ? 180 : 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          transition={{ type: "spring" as const, stiffness: 300, damping: 25 }}
         >
           <ChevronLeft size={14} />
         </motion.div>
